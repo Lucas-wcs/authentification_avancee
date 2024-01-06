@@ -4,7 +4,7 @@ import "./App.css";
 import { useState } from "react";
 
 function App() {
-  const [user, setUser] = useState();
+  const [auth, setAuth] = useState();
 
   return (
     <>
@@ -13,7 +13,7 @@ function App() {
           <li>
             <Link to="/">Home</Link>
           </li>
-          {user == null ? (
+          {auth == null ? (
             <>
               <li>
                 <Link to="/login">Login</Link>
@@ -27,7 +27,7 @@ function App() {
               <button
                 type="button"
                 onClick={() => {
-                  setUser(null);
+                  setAuth(null);
                 }}
               >
                 Logout
@@ -38,7 +38,7 @@ function App() {
       </nav>
       {user && <p>Hello {user.email}</p>}
       <main>
-        <Outlet context={{ user, setUser }} />
+        <Outlet context={{ auth, setAuth }} />
       </main>
     </>
   );

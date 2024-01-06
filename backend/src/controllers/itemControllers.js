@@ -39,14 +39,15 @@ const read = async (req, res, next) => {
 
 // The A of BREAD - Add (Create) operation
 const add = async (req, res, next) => {
-  // Only allowed if authentified
-  if (req.body.userId == null) {
-    res.sendStatus(401);
+  // We know someone is authenticated
+  // Only allowed if admin
+  if (req.auth.isAdmin === false) {
+    res.sendStatus(403);
     return;
   }
 
   // Extract the item data from the request body
-  const item = { ...req.body, user_id: req.body.userId };
+  const item = { ...req.body, user_id: req.auth.sub };
 
   try {
     // Insert the item into the database

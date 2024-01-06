@@ -10,7 +10,7 @@ function Home() {
 
   const titleRef = useRef();
 
-  const { user } = useOutletContext();
+  const { auth } = useOutletContext();
 
   const revalidator = useRevalidator();
 
@@ -24,10 +24,12 @@ function Home() {
         `${import.meta.env.VITE_BACKEND_URL}/api/items`,
         {
           method: "post",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${auth.token}`,
+          },
           body: JSON.stringify({
             title: titleRef.current.value,
-            userId: user.id,
           }),
         }
       );
@@ -47,7 +49,7 @@ function Home() {
 
   return (
     <>
-      {user != null && (
+      {auth != null && (
         <form onSubmit={handleSubmit}>
           <div>
             {/* Champ pour le title */}
