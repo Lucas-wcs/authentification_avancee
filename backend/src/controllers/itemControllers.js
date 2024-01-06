@@ -41,7 +41,7 @@ const read = async (req, res, next) => {
 const add = async (req, res, next) => {
   // We know someone is authenticated
   // Only allowed if admin
-  if (req.auth.isAdmin === false) {
+  if (!req.auth.isAdmin) {
     res.sendStatus(403);
     return;
   }

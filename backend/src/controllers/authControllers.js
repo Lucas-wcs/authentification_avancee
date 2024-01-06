@@ -20,7 +20,7 @@ const login = async (req, res, next) => {
     );
 
     if (verified) {
-      // Respond with the user in JSON format (but without the hashed password)
+      // Respond with the user and a signed token in JSON format (but without the hashed password)
       delete user.hashed_password;
 
       const token = await jwt.sign(

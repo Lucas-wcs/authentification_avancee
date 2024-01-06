@@ -26,7 +26,7 @@ function Home() {
           method: "post",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${auth.token}`,
+            Authorization: `Bearer ${auth.token}`, // Inclusion du jeton JWT
           },
           body: JSON.stringify({
             title: titleRef.current.value,
@@ -34,7 +34,7 @@ function Home() {
         }
       );
 
-      // Recharge la page si la création réussit
+      // Recharger la page si la création réussit
       if (response.status === 201) {
         revalidator.revalidate();
       } else {
