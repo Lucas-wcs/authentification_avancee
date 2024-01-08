@@ -52,7 +52,11 @@ const verifyToken = (req, res, next) => {
 
     next();
   } catch (err) {
-    console.error(err);
+    //débuggez
+    console.error(err.message);
+    if(err.message === "jwt expired") {
+      console.log("envoyer l'utilisateur token expiré veuillez vous reconnecter")
+    }
 
     res.sendStatus(401);
   }

@@ -33,7 +33,8 @@ function Login() {
       if (response.status === 200) {
         const auth = await response.json();
 
-        setAuth(auth);
+        setAuth(auth.user);
+        localStorage.setItem("token", auth.token)
 
         navigate("/");
       } else {

@@ -26,13 +26,25 @@ function Home() {
           method: "post",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${auth.token}`, // Inclusion du jeton JWT
+            Authorization: `Bearer ${localStorage.getItem("token")}`, // Inclusion du jeton JWT
           },
           body: JSON.stringify({
             title: titleRef.current.value,
           }),
         }
       );
+
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/items`, {
+          title: titleRef.current.value,
+      },
+          {
+              headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${localStorage.getItem("token")}`, // Inclusion du jeton JWT
+              }
+          }
+
+      )
 
       // Recharger la page si la création réussit
       if (response.status === 201) {

@@ -46,12 +46,17 @@ const add = async (req, res, next) => {
     return;
   }
 
+  const item = tables.item.getItemById(itemId)
+
+  if(item.user_id === userId)
+
+
   // Extract the item data from the request body
   const item = { ...req.body, user_id: req.auth.sub };
 
   try {
     // Insert the item into the database
-    const insertId = await tables.item.create(item);
+    const insertId = await tables.item.create(item, req.auth.sub);
 
     // Respond with HTTP 201 (Created) and the ID of the newly inserted item
     res.status(201).json({ insertId });
